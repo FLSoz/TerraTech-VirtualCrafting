@@ -25,7 +25,7 @@ namespace VirtualCrafting.Crafting
 
         internal VirtualNetInventory m_SharedInventory = null;
 
-        public IVirtualInventory Inventory { get => this.m_SaveData.m_Inventory; }
+        public IVirtualInventory PlayerInventory { get => this.m_SaveData.m_Inventory; }
 
         #region Patches
         // We enable this in Campaign, RnD, CoOp Campaign, and that's it
@@ -210,7 +210,7 @@ namespace VirtualCrafting.Crafting
         {
             this.Reset();
             Active = false;
-            this.Inventory.UnsubscribeToInventoryChanged(this.OnInventoryChangedListener);
+            this.PlayerInventory.UnsubscribeToInventoryChanged(this.OnInventoryChangedListener);
         }
 
         public void Save(ManSaveGame.State saveState)
