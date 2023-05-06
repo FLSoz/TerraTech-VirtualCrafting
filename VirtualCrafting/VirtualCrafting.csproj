@@ -39,6 +39,11 @@
       <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +64,30 @@
       <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.Networking.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteMaskModule">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.SpriteMaskModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.SpriteShapeModule">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.SpriteShapeModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.StyleSheetsModule">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.StyleSheetsModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextCoreModule">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.TextCoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\..\Steam\steamapps\common\TerraTech\TerraTechWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -73,9 +102,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crafting\CraftingOrderResolver.cs" />
+    <Compile Include="JSONLoaders\JSONChunkVirtualizerLoader.cs" />
+    <Compile Include="JSONLoaders\JSONCustomFabricatorParser.cs" />
+    <Compile Include="Model\ItemCountList.cs" />
+    <Compile Include="Model\VirtualBlock.cs" />
+    <Compile Include="Model\VirtualChunk.cs" />
+    <Compile Include="Model\VirtualFabricator.cs" />
+    <Compile Include="Inventory\VirtualInventoryJSONConverter.cs" />
+    <Compile Include="JSONLoaders\JSONCustomChunkParser.cs" />
+    <Compile Include="JSONLoaders\JSONVirtualChunkSourceLoader.cs" />
+    <Compile Include="Model\IVirtualCraftingBlock.cs" />
+    <Compile Include="Inventory\IVirtualInventory.cs" />
+    <Compile Include="Crafting\ManVirtualCrafting.cs" />
+    <Compile Include="Model\IVirtualItem.cs" />
+    <Compile Include="ModdedContent\ManVirtualModdedContent.cs" />
+    <Compile Include="Model\VirtualCraftingOrder.cs" />
+    <Compile Include="Inventory\VirtualNetInventory.cs" />
+    <Compile Include="Modules\ModuleChunkVirtualizer.cs" />
+    <Compile Include="Modules\ModuleVirtualChunkSource.cs" />
+    <Compile Include="Model\ItemCountListExtensions.cs" />
+    <Compile Include="Networking\NetworkingManager.cs" />
+    <Compile Include="Networking\VirtualCraftingMessage.cs" />
+    <Compile Include="Patches\VirtualCraftingPatches.cs" />
     <Compile Include="VirtualCraftingMod.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Inventory\VirtualInventory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\TerraTechNetworkingWrapper\TerraTechNetworkingWrapper.csproj">
+      <Project>{48407d3c-d673-4fa4-8422-2e23377057b3}</Project>
+      <Name>TerraTechNetworkingWrapper</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Datastructures\" />
+    <Folder Include="UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

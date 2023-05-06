@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using UnityEngine.Assertions;
 
 namespace VirtualCrafting
 {
@@ -203,6 +205,15 @@ namespace VirtualCrafting
             if (minLoggingLevel <= (byte)LogLevel.WARN)
             {
                 Log((byte)LogLevel.WARN, message);
+            }
+        }
+
+        internal void Assert(bool conditional, string error)
+        {
+            if (!conditional)
+            {
+                Fatal(error);
+                throw new AssertionException(error, error);
             }
         }
     }

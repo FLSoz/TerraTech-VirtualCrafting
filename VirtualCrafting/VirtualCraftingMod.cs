@@ -4,13 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TTCustomNetworkingWrapper;
 using UnityEngine;
+using VirtualCrafting.JSONLoaders;
+using VirtualCrafting.Crafting;
+using VirtualCrafting.Model;
+using VirtualCrafting.ModdedContent;
+using VirtualCrafting.Networking;
 
 namespace VirtualCrafting
 {
     public class VirtualCraftingMod : ModBase
     {
-        internal const string HarmonyID = "flsoz.ttmm.weaponaim.mod";
+        internal const string HarmonyID = "flsoz.ttsmm.virtual.crafting.mod";
         internal static readonly Harmony harmony = new Harmony(HarmonyID);
         private static bool Inited = false;
 
@@ -28,6 +34,15 @@ namespace VirtualCrafting
             if (!Inited)
             {
                 ConfigureLogger();
+
+                // Custom Networking
+                CustomNetworkingWrapper<VirtualCraftingMessage> wrapper = ManCustomNetHandler.GetNetworkingWrapper<VirtualCraftingMessage>(
+                    "VirtualCrafting", NetworkingManager.ReceiveAsClient, NetworkingManager.ReceiveAsHost
+                );
+                ManCustomNetHandler.RegisterNetworkingWrapper(wrapper);
+
+                // setup
+                Singleton.Manager<ManVirtualModdedContent>.inst.Setup();
             }
         }
 
@@ -38,12 +53,23 @@ namespace VirtualCrafting
 
         public override void Init()
         {
-            throw new NotImplementedException();
+            harmony.PatchAll();
+            Singleton.Manager<ManVirtualModdedContent>.inst.Init();
+            JSONBlockLoader.RegisterModuleLoader(new JSONVirtualChunkSourceLoader());
+            JSONBlockLoader.RegisterModuleLoader(new JSONChunkVirtualizerLoader());
         }
 
         public override void DeInit()
         {
-            throw new NotImplementedException();
+            harmony.UnpatchAll(HarmonyID);
+            Singleton.Manager<ManVirtualModdedContent>.inst.Reset();
+        }
+
+        public int LateInitOrder = 10;
+
+        public void LateInit()
+        {
+            Singleton.Manager<ManVirtualModdedContent>.inst.LateInit();
         }
     }
 }
