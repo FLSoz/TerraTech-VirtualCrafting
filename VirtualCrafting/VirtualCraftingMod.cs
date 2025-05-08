@@ -33,6 +33,7 @@ namespace VirtualCrafting
         {
             if (!Inited)
             {
+                Inited = true;
                 ConfigureLogger();
 
                 // Custom Networking
@@ -42,6 +43,8 @@ namespace VirtualCrafting
                 ManCustomNetHandler.RegisterNetworkingWrapper(wrapper);
 
                 // setup
+                Singleton.instance.gameObject.AddComponent<ManVirtualCrafting>();
+                Singleton.instance.gameObject.AddComponent<ManVirtualModdedContent>();
                 Singleton.Manager<ManVirtualModdedContent>.inst.Setup();
             }
         }
@@ -65,7 +68,7 @@ namespace VirtualCrafting
             Singleton.Manager<ManVirtualModdedContent>.inst.Reset();
         }
 
-        public int LateInitOrder = 10;
+        public static int LateInitOrder = 10;
 
         public void LateInit()
         {
